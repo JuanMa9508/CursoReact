@@ -1,0 +1,212 @@
+horacio.estevez@gmail.com
+
+
+
+http://alumni.education
+
+http://educacionit.com/tualua
+
+
+Node.JS : Entorno de desarrollo I/O Asincronico
+
+NPM : Node Package Manager
+
+npm {install|i} <tipo> <paquete>
+
+tipo : 
+
+    --save|-S           Paquetes de produccion
+    --save-dev|-D       Paquetes de desarrollo
+    -g                  Paquetes globales
+
+> npm i -g create-react-app
+> create-react-app <proyecto>
+> cd <proyecto>
+> npm start 
+
+
+1 - Siempre tiene que estar la variable React en scope
+2 - Todos los componentes de react son funciones en mayuscula que retornan otro React.Component , DOMElement  ó String : 
+
+    function App(){ return "Hola Mundo" }
+    let App = () => { return "Hola Mundo" }
+    class App {}
+
+3 - Un componente ejecutado se escribe en forma JSX : 
+
+        App()   ===    <App/>
+
+
+
+
+4- Los componentes solo pueden retornan una sola cosa. Si tengo multiple retorno de elementos los puedo agregar adentro de una etiqueta HTML 
+5 - Una funcion de tipo Class siempre extiende a React.Component
+6 - Una clase, para retornar, necesita estar adentro del metodo ciclo de vida "render"
+7 - Un componente de tipo clase puede tener estado(state) el cual es creado en su constructor. Este estado puede ser compartido a todos sus componentes hijos. Cada vez que el estado cambia, este y todos los componentes que lo usen, van a volver a ejecutar su método render. 
+8 - Cualquier componente de react puede recibir parametros(props) de solo lectura, usualmente son el state de un componente padre y se escriben en JSX como atributos de HTML : 
+
+    <App required />    ===   App({required:true})
+    <App test="hola" /> ===   App({test:"hola"})
+    <App fn={()=>{}} /> ===   App({fn:()=>{}})
+
+9 - El estado de un componente no puede ser modificado por asignacion de variable sino a través de this.setState({}) , en donde describimos como debería verse el próximo estado de la aplicación
+
+
+
+
+/*******************************************/
+
+let app = function (){}
+let app = () => {}
+
+
+let app = function (){ return "hola" }
+let app = () => { return "hola" }
+let app = () => "hola" 
+
+
+
+
+SENTENCIAS : No necesariamente dan retorno (if/else/forEach/for/for...in)
+
+let foo = if(condicion){return true }else{return false}
+let arr = [1,2,3]
+let nuevo_array = []
+
+arr.forEach(([elemento,indice,lista])=>{
+    nuevo_array.push(elemento+1)
+})
+
+EXPRESIONES : Obligatoriamente da retorno(operador ternario)
+
+let foo = condicion ? true : false
+
+let arr = [1,2,3]
+let nuevo_array = arr.map((e,i,a)=>{
+    return e + 1
+})
+let nuevo_array = arr.map((e)=> e + 1)
+let nuevo_array = arr.map(e=> e + 1)
+
+
+
+
+
+DESTRUCTURING : 
+
+let arr = [1,2,3,4]
+let [uno,dos,tres,cuatro] = arr
+
+let uno = arr[0]
+let dos = arr[1]
+let tres = arr[2]
+let cuatro = arr[3]
+
+let obj = {x:1,y:2,z:3}
+let {x:x,y:y,z:z} = obj
+//OBJECT SHORTHAND
+let {x,y,z} = obj
+
+let x = obj.x
+let y = obj.y
+let z = obj.z
+
+
+
+
+
+
+CONTEXTO : Hace referencia al objeto que contiene a la funcion, por lo general y esta en la palabra reservada "this".  No es estatico, es decir que puede cambiar dependiendo la ejecucion o el programador. 
+//window.foo = function foo(){}
+//var foo = function foo(){}
+function foo(){
+    console.log(this)
+}
+
+foo() // window{}
+
+
+
+let obj = {
+    x : 1 , 
+    fn : function(){
+        console.log(this)
+        window.setTimeout(()=>{
+            console.log(this)
+        },0)
+    }
+}
+
+obj.fn() // obj{}
+
+
+
+//CALL - APPLY - BIND - NEW 
+function ctx(a,b){
+    console.log(a,b)
+    console.log(this)
+}
+
+ctx(1,2) //1 2 window{}
+ctx.call({x:1},1,2) //1 2 {x:1}
+ctx.apply({x:1},[1,2]) //1 2 {x:1}
+let otra_fn = ctx.bind({x:1})
+
+otra_fn()
+ctx()
+
+
+https://www.youtube.com/watch?v=PMfcsYzj-9M
+https://github.com/rus0000/jsinheritance
+
+https://github.com/HoracioGutierrez/react-accenture
+
+https://tinyurl.com/y5ay4zt2
+
+1) Crear un estado nuevo en App llamado "contador" que inicie con el numero 0
+2) Crear un componente nuevo llamado Contador e incluirlo por JSX en App
+3) Pasarle a Contador por prop el state de App "contador"
+4) Crear un método en App llamado aumentarContador , el cual aumenta el numero en una unidad
+5) Pasarle a Contador por prop el método del punto anterior
+6) Asignarle al onClick de un boton en Contador el prop recibido del método 
+
+
+
+
+redux: es una libreria para implementar el patron pub/sub en cualquier aplicacion de JS. Se separa en dos : Redux y react-redux
+
+npm i -S redux react-redux
+
+Store: Es analogo al state de un componente pero este no se crea directo sino que con un reducer
+
+Reducer: Es una funcion pura que toma dos parametros: el estado inicial de la aplicacion (o anterior) y el action que se esta despachando
+El reducer tiene que switchear en base a la accion y retornar el nuevo estado de la aplicacion
+
+Action : Es una funcion pura que puede vivir en cualquier Archivo. No necesitamos nada para crearla pero es obligatorio que :
+
+    1 - Que haya retorno de tipo OBJECT
+    2 - Toda Operacion entre el inicio del stack al retorno sea sincronica 
+
+Redux
+1)Crear en algun archivo un store: Para eso necesitamos la funcion createStore de "redux". Esta toma como parametro un reducer
+2)Crear en algun archivo un reducer: Para eso no necesitamos nada, solo exportar una funcion que tome dos parametros y siempre
+returne algo dentro de un switch
+
+
+REACT Redux
+
+    Conectar la App con redux
+
+    1)Incluir la parte de la aplicacion que nos interesa conectar a redux con el componente Provider de "react-redux"
+    2)Pasarle como prop al Provider el store
+
+    Conectar componentes individuales con el store
+
+    Necesitamos la funcion connect de "react-redux", ejecutarla y pasarle el componente que queremos conectar
+
+        Consumir el store: Usamos el primer parametro de connect el cual es una funcion. Esta recibe una copia del store y
+        lo que retorne, va a formar parte de los props del componente que estemos conectando
+
+        Despachar una accion : Usamos el segundo parametro de connect el cual es una funcion. Esta recibe una copia
+        de la funcion para despachar (llamda dispatch) y lo que retorne, va a formar parte de los props del componente
+        que estemos conectando
