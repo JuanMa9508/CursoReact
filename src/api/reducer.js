@@ -28,12 +28,9 @@ let reducer = (prev=init,action) =>{
             
             }
         case "FORMULARIO_EDIT" :
-        let copia_usuarios = [...prev.usuarios]        
-        let nombre = prev.nombre;
-        let apellido = prev.apellido        
-        copia_usuarios[prev.editable].nombre = nombre;
-        copia_usuarios[prev.editable].apellido = apellido;
-
+        let copia_usuarios = [...prev.usuarios]
+        copia_usuarios[prev.editable].nombre = prev.nombre
+        copia_usuarios[prev.editable].apellido = prev.apellido  
         return {...prev,usuarios : copia_usuarios}
 
         case "FORMULARIO_CHANGE" :
