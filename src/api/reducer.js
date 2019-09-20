@@ -5,14 +5,16 @@ let init = {
     formvisible:true,
     nombre: "",
     apellido:"",
-    usuarios: []
+    usuarios: [],
+    editable : -1
 
 }
 
 let reducer = (prev=init,action) =>{
     switch(action.type){
         
-        case "FORMULARIO_SUBMIT" :
+        case "FORMULARIO_SUBMIT" : 
+           
             return {...prev,
                 usuarios : [
                     ...prev.usuarios,
@@ -23,10 +25,19 @@ let reducer = (prev=init,action) =>{
                 ],
                 nombre: "",
                 apellido: ""
+            
             }
+        case "FORMULARIO_EDIT" :
+        let copia_usuarios = [...prev.usuarios]        
+        let nombre = prev.nombre;
+        let apellido = prev.apellido        
+        copia_usuarios[prev.editable].nombre = nombre;
+        copia_usuarios[prev.editable].apellido = apellido;
+
+        return {...prev,usuarios : copia_usuarios}
 
         case "FORMULARIO_CHANGE" :
-            return {...prev,[action.id]:action.valor}    
+            return {...prev,[action.id]:action.valor}          
 
         case "FORMULARIO_MOSTRAR":
             return {...prev,formvisible: !prev.formvisible}
@@ -37,6 +48,9 @@ let reducer = (prev=init,action) =>{
                     ...prev.usuarios.slice(0,action.i),...prev.usuarios.slice(action.i+1)
                 ]          
             }
+
+        case "LISTADOUSUARIOS_EDITAR":
+            return { ...prev,editable : action.i,nombre : prev.usuarios[action.i].nombre,apellido :prev.usuarios[action.i].apellido }     
 
         case "CONTADOR_AUMENTAR" :
             return {...prev,contador: prev.contador +1}

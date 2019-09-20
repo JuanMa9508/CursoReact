@@ -12,6 +12,16 @@ export let borrarUsuario = i => ({
     i:i
 })
 
+export let editarUsuario = i => ({
+    type : "LISTADOUSUARIOS_EDITAR",
+    i:i
+
+})
+export let handleEdit = e => {
+    e.preventDefault()
+    return {type : "FORMULARIO_EDIT"}
+}
+
 export let handleSubmit = e => {
     e.preventDefault()
     return {type : "FORMULARIO_SUBMIT"}}
