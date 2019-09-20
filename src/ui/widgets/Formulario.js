@@ -22,7 +22,7 @@ class Formulario extends Component{
                     null
                 }
                 <button onClick={mostrarFormulario}>{formvisible?"Ocultar":"Mostrar"}</button>
-                <ListadoUsuarios usuarios={usuarios}/>
+                <ListadoUsuarios />
             </div>
         )
     }

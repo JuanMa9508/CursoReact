@@ -6,6 +6,12 @@ export let reiniciarContador = () => ({type : "CONTADOR_REINICIAR"})
 
 export let mostrarFormulario = () => ({type : "FORMULARIO_MOSTRAR"})
 
+
+export let borrarUsuario = i => ({
+    type : "LISTADOUSUARIOS_BORRAR",
+    i:i
+})
+
 export let handleSubmit = e => {
     e.preventDefault()
     return {type : "FORMULARIO_SUBMIT"}}

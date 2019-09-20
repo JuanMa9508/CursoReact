@@ -30,6 +30,13 @@ let reducer = (prev=init,action) =>{
 
         case "FORMULARIO_MOSTRAR":
             return {...prev,formvisible: !prev.formvisible}
+           
+        case "LISTADOUSUARIOS_BORRAR" :
+            return {...prev,
+                usuarios : [
+                    ...prev.usuarios.slice(0,action.i),...prev.usuarios.slice(action.i+1)
+                ]          
+            }
 
         case "CONTADOR_AUMENTAR" :
             return {...prev,contador: prev.contador +1}
