@@ -12,7 +12,10 @@ class ListadoUsuarios extends Component{
                 ?
                  usuarios.map((usuario,i) =>
                     <li key={i}>{usuario.nombre} {usuario.apellido}
-                    <button>Editar</button> <button onClick={borrarUsuario i}>Borrar</button>
+                    <button>Editar</button> <button onClick={                        
+                        //()=>{ borrarUsuario(i) }
+                        borrarUsuario.bind(null,i)                        
+                        }>Borrar</button>
                     </li>)
                 :
                 <li>No hay Usuarios</li>    
