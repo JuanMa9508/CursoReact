@@ -11,8 +11,18 @@ let init = {
 }
 
 let reducer = (prev=init,action) =>{
-    switch(action.type){
-        
+    switch(action.type){   
+
+        case "USUARIOS_PEDIR" :
+            let usuarios_api = action.usuarios
+            let usuarios_mod = usuarios_api.map(u =>{
+                return {nombre:u.name.split(" ")[0] ,apellido: u.name.split(" ")[1]}
+            })
+
+            return{
+                ...prev,usuarios:usuarios_mod
+            }
+
         case "FORMULARIO_SUBMIT" : 
            
             return {...prev,
@@ -31,7 +41,7 @@ let reducer = (prev=init,action) =>{
         let copia_usuarios = [...prev.usuarios]
         copia_usuarios[prev.editable].nombre = prev.nombre
         copia_usuarios[prev.editable].apellido = prev.apellido  
-        return {...prev,usuarios : copia_usuarios}
+        return {...prev,usuarios : copia_usuarios,nombre: "",apellido : "",editable : -1}
 
         case "FORMULARIO_CHANGE" :
             return {...prev,[action.id]:action.valor}          

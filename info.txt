@@ -210,3 +210,11 @@ REACT Redux
         Despachar una accion : Usamos el segundo parametro de connect el cual es una funcion. Esta recibe una copia
         de la funcion para despachar (llamda dispatch) y lo que retorne, va a formar parte de los props del componente
         que estemos conectando
+
+
+
+
+
+
+    Usar thunk : es un plugin de redux que nos permite crear acciones asincronicas.Para esto, el action tiene que obligatoriamente
+    retornar una funcion, la cual va a volver a recibir dispatch. Podemos entonces usar "dispatch" para despachar multiples actions

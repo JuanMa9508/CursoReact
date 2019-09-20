@@ -32,3 +32,18 @@ export let handleChange = e => ({
     valor: e.target.value,
     id : e.target.id
 })
+
+
+export let pedirUsuarios = () => dispatch => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+    .then (res => res.json())
+    .then(res =>{
+        dispatch( {type :"USUARIOS_PEDIR",usuarios:res})
+    })
+    .catch(err=>{
+        dispatch( {type: "USUARIOS_ERROR"})
+    })
+
+}
+
+
